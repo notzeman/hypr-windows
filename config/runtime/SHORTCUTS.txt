@@ -1,0 +1,79 @@
+OMARCHY WINDOWS - Win means the Windows/Super key
+
+Win+Space                 Flow Launcher (Escape dismisses it)
+Win+Alt+Space             Local window-manager control menu
+Win+Enter                 CMD in your user folder (translucent, no Clink banner)
+Win+R                     Native Windows Run dialog
+Win+Shift+R               Tray of running services (background app icons)
+Three-finger swipe left   Next Komorebi workspace (Ctrl+Alt+F9)
+Three-finger swipe right  Previous Komorebi workspace (Ctrl+Alt+F10)
+Win+K                     This shortcut reference
+Win+Escape                Power menu (lock/sleep/restart/shutdown/sign out)
+Win+Shift+A               Notepad++ (VSCodium equivalent)
+Win+Shift+L               Chromium (LibreWolf equivalent)
+Win+Shift+B               Chromium browser
+Win+Shift+F               File Explorer
+Win+1..9,0                Workspace 1..10 (bar shows 1..5 plus active/occupied extras)
+Win+Shift+1..9,0          Move window to workspace 1..10 and follow it
+Win+Tab / Win+Shift+Tab   Next / previous Komorebi workspace
+Win+arrows                Focus adjacent tile
+Win+Shift+arrows          Move tile
+Win+Ctrl+arrows           Resize horizontal/vertical axis
+Win+W                     Close focused window (normal close, not kill)
+Win+F                     Monocle (one container fills usable work area)
+Win+Alt+F                 Native maximize (not Hyprland full-width)
+Win+T                     Floating / tiled window
+Win+left-drag             Move a window from anywhere; tiled windows rearrange on drop
+Win+G                     Stack all windows on this workspace
+Win+Shift+G               Unstack current group
+Win+Alt+Tab               Next window in stack
+Win+Alt+P                 Pause / resume tiling
+Win+Ctrl+V                Windows clipboard history (enable in Settings if wanted)
+Win+Ctrl+E                Native emoji panel
+PrintScreen               Native snipping overlay
+Alt+PrintScreen           Open OBS (does NOT start recording)
+Win+Ctrl+Shift+Space      Windows themes settings (not a YASB theme switcher)
+Win+Ctrl+Space            Thumbnail wallpaper picker (Pictures\Wallpapers); Esc closes
+Win+L                     Native Windows lock (unchanged)
+Media / brightness keys   Native Windows behavior (unchanged)
+Ctrl+Alt+F11              Suspend/resume remapped hotkeys
+Ctrl+Alt+F7               Re-arm keyboard hook if shortcuts stop responding
+Ctrl+Alt+F6               Show/hide native window title-bar buttons
+Ctrl+Alt+F8               Restore Windows taskbar until hotkey service restarts
+Ctrl+Alt+F12              STOP tiling, restore hidden windows AND taskbar, stop bar/hotkeys
+
+Desktop switch (PowerShell, from the repository):
+  .\switch.ps1 apply      Enable Hypr Windows and its keybindings
+  .\switch.ps1 remove     Restore Windows; keep Flow Win+Space and mouse setup
+  .\switch.ps1 status     Show selected mode
+Ctrl+Alt+F12 also runs Remove (persistent OFF, not just a temporary stop).
+The 'Hypr Windows Switch' task respects that mode flag. When enabled it repairs
+missing desktop services every minute using a windowless launcher.
+
+Windows-reserved shortcuts may not be interceptable; test on this machine.
+No Win+Ctrl+L override, color picker, forced recording, idle lock policy,
+or unknown ~200 Linux default bindings are installed.
+Win+G replaces Xbox Game Bar while tiling is running.
+Win+Ctrl+arrows replace Windows virtual-desktop switching while tiling runs.
+Use Ctrl+Alt+F11 to temporarily regain those Windows shortcuts.
+
+TOP BAR
+Wi-Fi icon (right side)   Click to list Wi-Fi networks; connect/disconnect there
+Tray button (far right)   Click to show/hide background app icons (same as Win+Shift+R)
+Win+R                     Native Windows Run dialog (not remapped)
+
+CMD directory listing: l (detailed eza table, hidden files, headers, colors/icons)
+  l "C:\Program Files"    List another directory
+  l -l                   Detailed listing (already the default)
+  l -la                  Hidden files are already included by default
+New CMDs use JetBrainsMono NF and UTF-8 for the icon glyphs.
+CMD clear: clear (alias for cls, clears the screen)
+CMD current directory: pwd (alias for echo %cd%)
+CMD opens in your user profile folder by default.
+Open a new CMD or run clink-reload in an existing CMD to load the aliases.
+The original dir and cls commands remain unchanged; aliases are interactive only.
+
+Cursor: Bibata-Modern-Classic (black), applied per user (no admin needed).
+The pointer stays visible at all times (auto-hide is disabled). Restore the
+original cursors with:
+  & "$env:USERPROFILE\.config\omarchy-windows\bibata-cursor.ps1" -Restore

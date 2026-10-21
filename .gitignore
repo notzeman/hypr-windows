@@ -1,0 +1,6 @@
+*.log
+*.pid
+*.bak
+state/
+backups/
+.DS_Store

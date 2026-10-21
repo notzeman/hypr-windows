@@ -1,0 +1,129 @@
+# Omarchy-inspired Windows translation. Native taskbar is hidden by hotkeys.ahk.
+watch_config: true
+watch_stylesheet: true
+debug: false
+update_check: false
+show_systray: true
+bars:
+  omarchy:
+    enabled: true
+    screens: ['*']
+    class_name: omarchy-bar
+    alignment: {position: top, align: center}
+    dimensions: {width: '100%', height: 24}
+    padding: {top: 0, left: 0, bottom: 0, right: 0}
+    blur_effect: {enabled: true, dark_mode: true, round_corners: false}
+    animation: {enabled: false}
+    window_flags:
+      always_on_top: true
+      windows_app_bar: true
+      hide_on_fullscreen: true
+    widgets:
+      left: [workspaces]
+      center: [clock, traffic]
+      right: [cpu, memory, media, volume, battery, wifi, power, systray]
+widgets:
+  workspaces:
+    type: komorebi.workspaces.WorkspaceWidget
+    options:
+      label_workspace_btn: '{index}'
+      label_workspace_active_btn: '{index}'
+      label_workspace_populated_btn: '{index}'
+      hide_empty_workspaces: false
+      enable_scroll_switching: true
+  language:
+    type: yasb.language.LanguageWidget
+    options:
+      label: '{lang[language_code]}'
+  clock:
+    type: yasb.clock.ClockWidget
+    options:
+      label: '{%A %I:%M %p}'
+      label_alt: '{%d %B W%V %Y}'
+      calendar: {blur: false, round_corners: false}
+  traffic:
+    type: yasb.traffic.TrafficWidget
+    options:
+      label: '↓{download_speed} ↑{upload_speed}'
+      speed_unit: bytes
+      update_interval: 2000
+  cpu:
+    type: yasb.cpu.CpuWidget
+    options:
+      label: 'CPU {info[percent][total]}%'
+      update_interval: 2000
+      hide_decimal: true
+  memory:
+    type: yasb.memory.MemoryWidget
+    options:
+      label: 'RAM {virtual_mem_percent}%'
+      hide_decimal: true
+  media:
+    type: yasb.media.MediaWidget
+    options:
+      label: '{title}'
+      hide_empty: true
+      show_thumbnail: false
+      max_field_size: {label: 12, label_alt: 20}
+  volume:
+    type: yasb.volume.VolumeWidget
+    options:
+      label: 'VOL {level}'
+      audio_menu: {blur: false, round_corners: false}
+  battery:
+    type: yasb.battery.BatteryWidget
+    options:
+      label: 'BAT {percent}%'
+      charging_options: {blink_charging_icon: false}
+  power:
+    type: yasb.custom.CustomWidget
+    options:
+      class_name: power-menu
+      label: '⏻'
+      callbacks:
+        on_left: 'exec "@@LOCALAPPDATA@@\Programs\AutoHotkey\v2\AutoHotkey64.exe" "@@USERPROFILE@@\.config\omarchy-windows\actions.ahk" power'
+  wifi:
+    type: yasb.wifi.WifiWidget
+    options:
+      label: '{wifi_icon}'
+      label_alt: '{wifi_icon} {wifi_name}'
+      update_interval: 3000
+      wifi_icons: ["\uf1eb", "\uf1eb", "\uf1eb", "\uf1eb", "\uf1eb"]
+      callbacks:
+        on_left: 'toggle_menu'
+        on_right: 'toggle_label'
+      menu_config:
+        blur: true
+        round_corners: true
+        round_corners_type: 'normal'
+        border_color: 'System'
+        alignment: 'right'
+        direction: 'down'
+        offset_top: 6
+        offset_left: 0
+        wifi_icons_secured: ["\ue701", "\ue701", "\ue701", "\ue701"]
+        wifi_icons_unsecured: ["\ue701", "\ue701", "\ue701", "\ue701"]
+  systray:
+    type: yasb.systray.SystrayWidget
+    options:
+      class_name: 'systray'
+      label_collapsed: '▼'
+      label_expanded: '▶'
+      label_position: 'right'
+      icon_size: 16
+      pin_click_modifier: 'alt'
+      show_unpinned: false
+      show_unpinned_button: true
+      show_in_popup: true
+      icons_per_row: 5
+      use_hook: false
+      tooltip: true
+      popup:
+        blur: true
+        round_corners: true
+        round_corners_type: 'normal'
+        border_color: 'System'
+        alignment: 'right'
+        direction: 'down'
+        offset_top: 6
+        offset_left: 0

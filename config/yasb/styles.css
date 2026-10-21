@@ -1,0 +1,163 @@
+* {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    color: #ffffff;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.omarchy-bar { background-color: rgba(30, 30, 46, 0.50); }
+.widget { padding: 0 3px; }
+.widget .label { padding: 0 2px; }
+.widget .icon { font-family: "JetBrainsMono NF"; color: #ffffff; }
+.komorebi-workspaces { padding: 0 4px; }
+.komorebi-workspaces .ws-btn {
+    color: #ffffff;
+    padding: 0 4px;
+    background-color: transparent;
+    border-bottom: 2px solid transparent;
+}
+.komorebi-workspaces .ws-btn.populated { color: #ffffff; }
+.komorebi-workspaces .ws-btn.active {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.komorebi-workspaces .ws-btn:hover { background-color: rgba(255, 255, 255, 0.18); }
+.clock-widget .label { color: #ffffff; }
+.power-menu .label { color: #ffffff; }
+.battery-widget .label.critical { color: #ffffff; }
+.media-widget .btn { font-family: "JetBrainsMono NF"; padding: 0 2px; color: #ffffff; }
+.power-menu .label { font-family: "JetBrainsMono NF"; }
+/* Display 1-5 by default, plus any active or occupied workspace beyond 5.
+   YASB 2.0.7 exposes button-N classes but no visible-workspace-count option.
+   Qt stylesheets do not support display:none, so collapse later buttons. */
+.komorebi-workspaces .ws-btn {
+    min-width: 0px;
+    max-width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px;
+    font-size: 0px;
+}
+.komorebi-workspaces .ws-btn.button-1,
+.komorebi-workspaces .ws-btn.button-2,
+.komorebi-workspaces .ws-btn.button-3,
+.komorebi-workspaces .ws-btn.button-4,
+.komorebi-workspaces .ws-btn.button-5,
+.komorebi-workspaces .ws-btn.active,
+.komorebi-workspaces .ws-btn.populated {
+    min-width: 8px;
+    max-width: 100px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 10pt;
+}
+.tooltip, .calendar, .audio-menu {
+    background-color: #1e1e2e;
+    color: #ffffff;
+    border: 1px solid #45475a;
+}
+
+/* WiFi widget and its connect menu */
+.wifi-widget { padding: 0 3px; }
+.wifi-widget .widget-container .label { color: #ffffff; font-family: "JetBrainsMono NF"; }
+.wifi-widget .widget-container .icon { font-family: "JetBrainsMono NF"; color: #ffffff; }
+.wifi-menu {
+    font-family: "Segoe UI";
+    background-color: rgba(30, 30, 46, 0.65);
+    min-width: 340px;
+    border: 1px solid #45475a;
+}
+.wifi-menu .progress-bar { max-height: 2px; color: #89b4fa; }
+.wifi-menu .header {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    color: #ffffff;
+    background-color: rgba(30, 30, 46, 0.85);
+    border-bottom: 1px solid #45475a;
+}
+.wifi-menu .error-message {
+    font-size: 12px;
+    padding: 8px 12px;
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+.wifi-menu .wifi-list { background-color: transparent; }
+.wifi-menu .wifi-item {
+    min-height: 30px;
+    padding: 2px 10px;
+    margin: 2px 4px;
+    border-radius: 6px;
+}
+.wifi-menu .wifi-item:hover { background-color: rgba(255, 255, 255, 0.06); }
+.wifi-menu .wifi-item[active=true] { background-color: rgba(255, 255, 255, 0.12); }
+.wifi-menu .wifi-item .icon {
+    font-family: "Segoe MDL2 Assets";
+    font-size: 20px;
+    margin-right: 8px;
+    color: #ffffff;
+}
+.wifi-menu .wifi-item .name { font-size: 10pt; color: #ffffff; }
+.wifi-menu .wifi-item .password { background-color: transparent; color: #ffffff; font-size: 10pt; }
+.wifi-menu .wifi-item .status { font-size: 10pt; color: #ffffff; }
+.wifi-menu .wifi-item .strength { font-size: 10pt; color: #ffffff; }
+.wifi-menu .wifi-item .connect {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 3px 14px;
+    border-radius: 4px;
+    border: none;
+    color: #ffffff;
+}
+.wifi-menu .wifi-item .connect:hover { background-color: rgba(255, 255, 255, 0.25); }
+.wifi-menu .wifi-item .connect:pressed { background-color: rgba(255, 255, 255, 0.35); }
+.wifi-menu .footer {
+    font-size: 10pt;
+    padding: 8px 12px;
+    color: #ffffff;
+    background-color: rgba(30, 30, 46, 0.85);
+    border-top: 1px solid #45475a;
+}
+.wifi-menu .footer .settings-button,
+.wifi-menu .footer .refresh-icon {
+    font-family: "Segoe MDL2 Assets";
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    min-width: 24px;
+    min-height: 24px;
+}
+.wifi-menu .footer .settings-button:hover,
+.wifi-menu .footer .refresh-icon:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+}
+
+/* Systray (tray of running services) */
+.systray { background: transparent; border: none; margin: 0; padding: 0 3px; }
+.systray .unpinned-container,
+.systray .pinned-container { background: transparent; }
+.systray .button { border-radius: 4px; padding: 1px; }
+.systray .button:hover { background: rgba(255, 255, 255, 0.18); }
+.systray .unpinned-visibility-btn {
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 2px;
+    min-width: 14px;
+    max-width: 14px;
+    font-size: 8pt;
+}
+.systray .unpinned-visibility-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+}
+.systray-popup {
+    background-color: rgba(30, 30, 46, 0.65);
+    padding: 4px;
+    border: 1px solid #45475a;
+}
+.systray-popup .button { padding: 4px; margin: 0; border: 0; border-radius: 6px; }
+.systray-popup .button:hover { background-color: rgba(255, 255, 255, 0.10); }
