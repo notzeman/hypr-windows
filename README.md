@@ -31,7 +31,7 @@ different requirements. Each dependency retains its own license.
 
 ## Fresh Windows PC: install and set up
 
-These instructions are for **another Windows 10/11 x64 PC**, not Linux/macOS.
+These instructions are for **Windows 10/11 x64 PC**.
 Use **Windows PowerShell 5.1**, opened as your normal user. Installers for
 machine-wide applications will request UAC approval; do not run the desktop
 switch itself elevated. The scripts expect the standard locations in the table
