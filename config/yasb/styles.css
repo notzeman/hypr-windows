@@ -53,7 +53,7 @@
     padding-right: 4px;
     font-size: 10pt;
 }
-.calendar, .audio-menu {
+.audio-menu {
     background-color: #1e1e2e;
     color: #ffffff;
     border: 1px solid #45475a;
@@ -65,6 +65,64 @@
     border: 1px solid #45475a;
     border-radius: 6px;
 }
+
+/* Style the actual Qt calendar table/viewport, not just the popup frame.
+   Otherwise Qt's white Base palette hides white dates under our global theme. */
+.calendar {
+    background-color: rgba(30, 30, 46, 0.50);
+    color: #ffffff;
+    border: 1px solid #45475a;
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 520px;
+}
+.calendar QCalendarWidget {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    min-width: 360px;
+    min-height: 280px;
+}
+.calendar .calendar-table,
+.calendar QTableView,
+.calendar QTableView QWidget {
+    background-color: transparent;
+    alternate-background-color: transparent;
+    color: #ffffff;
+    selection-background-color: rgba(255, 255, 255, 0.18);
+    selection-color: #ffffff;
+    border: none;
+    outline: none;
+    font-family: "Segoe UI";
+    font-size: 11pt;
+}
+.calendar .calendar-table::item { padding: 4px; border: 1px solid transparent; }
+.calendar .calendar-table::item:selected {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 5px;
+}
+.calendar .calendar-table::item:hover { background-color: rgba(255, 255, 255, 0.08); }
+.calendar QHeaderView::section {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    padding: 6px 0;
+}
+.calendar .day-label,
+.calendar .month-label,
+.calendar .year-label,
+.calendar .date-label {
+    min-width: 112px;
+    margin-right: 12px;
+    background-color: transparent;
+    color: #ffffff;
+}
+.calendar .day-label { font-size: 11pt; padding-top: 8px; }
+.calendar .month-label { font-size: 14pt; font-weight: 600; padding-top: 6px; }
+.calendar .year-label { font-size: 11pt; padding-top: 4px; }
+.calendar .date-label { font-size: 44pt; font-weight: 600; padding: 4px 0 8px; }
 
 /* WiFi widget and its connect menu */
 .wifi-widget { padding: 0 3px; }

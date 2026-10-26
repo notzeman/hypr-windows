@@ -333,6 +333,12 @@ with native blur enabled. Header/footer backgrounds are transparent so they do
 not cover the blur. The list displays actual scan results, not placeholder rows;
 use its refresh button if a scan is still pending.
 
+The clock calendar uses the same 50%-opacity tint and native blur as tooltips.
+Its larger layout (roughly 540×300px at 100% scaling) includes a date/month/year
+sidebar and an explicitly themed Qt date grid: white readable text, transparent
+cells/viewport and a visible selection highlight instead of Qt's white default
+panel. Click a date to update the sidebar; mouse-wheel navigation changes months.
+
 ### Classic terminal transparency and blur
 
 In Hypr mode, `terminal-effects.ahk` detects visible classic CMD, Windows

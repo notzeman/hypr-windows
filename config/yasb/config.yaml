@@ -48,7 +48,15 @@ widgets:
     options:
       label: '{%A %I:%M %p}'
       label_alt: '{%d %B W%V %Y}'
-      calendar: {blur: false, round_corners: false}
+      calendar:
+        blur: true
+        round_corners: true
+        round_corners_type: 'normal'
+        border_color: 'None'
+        alignment: 'center'
+        direction: 'down'
+        offset_top: 6
+        show_years: true
   traffic:
     type: yasb.traffic.TrafficWidget
     options:
