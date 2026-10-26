@@ -12,7 +12,7 @@ LoadTerminalEffects() {
         if !RegExMatch(line, '^(\d+)=([\d,]+)$', &match)
             continue
         values := StrSplit(match[2], ',')
-        if values.Length != 9 && values.Length != 11
+        if values.Length != 9 && values.Length != 11 && values.Length != 12
             continue
         hwnd := Integer(match[1])
         try {
@@ -36,6 +36,17 @@ TerminalAccent(hwnd, state, flags := 2, tint := 0, animation := 0) {
     NumPut('Int', 19, data)
     NumPut('Ptr', accent.Ptr, 'UPtr', accent.Size, data, A_PtrSize)
     return DllCall('user32\SetWindowCompositionAttribute', 'Ptr', hwnd, 'Ptr', data, 'Int')
+}
+
+TerminalCaption(hwnd, bits) {
+    ; Change only WS_CAPTION; retain WS_VSCROLL/WS_HSCROLL and resize behavior.
+    style := WinGetStyle(hwnd)
+    replacement := (style & ~0xC00000) | bits
+    if style = replacement
+        return
+    WinSetStyle(replacement, hwnd)
+    DllCall('SetWindowPos', 'Ptr', hwnd, 'Ptr', 0, 'Int', 0, 'Int', 0,
+        'Int', 0, 'Int', 0, 'UInt', 0x4037) ; Async FRAMECHANGED, no move/focus
 }
 
 TerminalPalette(pid, index := -1, color := 0, write := false) {
@@ -96,8 +107,11 @@ UpdateTerminalEffects() {
                 continue
             pid := WinGetPID(hwnd)
             if TerminalEffects.Has(hwnd) {
-                if Integer(TerminalEffects[hwnd][1]) = pid
+                if Integer(TerminalEffects[hwnd][1]) = pid {
+                    if TerminalEffects[hwnd].Length = 12
+                        TerminalCaption(hwnd, 0)
                     continue
+                }
                 TerminalEffects.Delete(hwnd)
             }
             ; Save original layered attributes, including an existing color key.
@@ -118,6 +132,9 @@ UpdateTerminalEffects() {
             palette := TerminalPalette(pid)
             if palette
                 saved.Push(palette[1], palette[2])
+            else
+                saved.Push(16, 0) ; No palette was changed; index 16 is a sentinel.
+            saved.Push(WinGetStyle(hwnd) & 0xC00000)
             serialized := ''
             for value in saved
                 serialized .= (serialized = '' ? '' : ',') value
@@ -137,6 +154,7 @@ UpdateTerminalEffects() {
                 if !TerminalAccent(hwnd, 3, 2, 0)
                     WinSetTransparent(220, hwnd)
             }
+            TerminalCaption(hwnd, 0)
         } catch {
             ; Protected/elevated/closing consoles may reject cross-process changes.
         }
@@ -152,8 +170,10 @@ StopTerminalEffects(*) {
                 continue
             TerminalAccent(hwnd, Integer(saved[6]), Integer(saved[7]),
                 Integer(saved[8]), Integer(saved[9]))
-            if saved.Length = 11
+            if saved.Length >= 11 && Integer(saved[10]) < 16
                 TerminalPalette(Integer(saved[1]), Integer(saved[10]), Integer(saved[11]), true)
+            if saved.Length = 12
+                TerminalCaption(hwnd, Integer(saved[12]))
             if Integer(saved[2])
                 DllCall('SetLayeredWindowAttributes', 'Ptr', hwnd,
                     'UInt', Integer(saved[3]), 'UChar', Integer(saved[4]), 'UInt', Integer(saved[5]))

@@ -341,6 +341,11 @@ Windows background blur without injecting into the shell, changing its profile,
 renaming it, stealing focus, or opening a console. Text stays opaque instead of
 fading the entire window. A one-second timer picks up newly opened consoles;
 hidden AMD/Lenovo/helper consoles are excluded.
+Classic CMD/PowerShell title bars are removed for a continuous blurred surface.
+Native scrollbars remain visible and usable; their Windows-drawn tracks/thumbs
+are intentionally not made transparent. Win+left-drag still moves the windows.
+Only caption style bits are changed, preserving resize and scrollbar styles;
+service exit/Remove restores the original caption bits.
 
 The implementation uses undocumented `SetWindowCompositionAttribute` acrylic
 for stronger native blur, visually verified on this Windows 10 PC for CMD and
