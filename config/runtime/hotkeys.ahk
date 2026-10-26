@@ -31,6 +31,8 @@ StartHotkeyReliability()
 #Include mouse-drag.ahk
 #Include caption-buttons.ahk
 StartCaptionButtonHiding()
+#Include terminal-effects.ahk
+StartTerminalEffects()
 
 K(args) {
     global KExe

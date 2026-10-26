@@ -181,7 +181,7 @@ try {
     if ($PSScriptRoot -ne $store) { Copy-Item "$PSScriptRoot\switch.ps1" "$store\switch.ps1" -Force }
     Write-Utf8 "$store\repository.txt" $source
     Copy-Item "$source\scripts\*" $store -Force
-    foreach ($name in 'mouse-drag.ahk','caption-buttons.ahk','taskbar.ahk','cursor.ahk') { Copy-Item "$source\config\runtime\$name" $store -Force }
+    foreach ($name in 'mouse-drag.ahk','caption-buttons.ahk','taskbar.ahk','cursor.ahk','terminal-effects.ahk') { Copy-Item "$source\config\runtime\$name" $store -Force }
     Run-Ahk "$store\restore-windows.ahk"
     $state=Get-Content $manifest -Raw | ConvertFrom-Json
     if ($Mode -eq 'remove') {

@@ -67,6 +67,9 @@ CMD directory listing: l (detailed eza table, hidden files, headers, colors/icon
   l -l                   Detailed listing (already the default)
   l -la                  Hidden files are already included by default
 New CMDs use JetBrainsMono NF and UTF-8 for the icon glyphs.
+In Hypr mode, visible classic CMD/PowerShell windows get background blur and
+transparency with opaque text. New consoles are detected within about a second.
+Remove restores their original appearance. Windows Terminal manages its own acrylic.
 CMD clear: clear (alias for cls, clears the screen)
 CMD current directory: pwd (alias for echo %cd%)
 CMD opens in your user profile folder by default.

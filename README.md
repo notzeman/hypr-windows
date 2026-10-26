@@ -287,7 +287,8 @@ Edit the repository files, then run Apply to deploy changes.
 | Hover focus | Windows focus-follows-mouse enabled | prior Windows setting restored |
 | Workspace/terminal/app shortcuts | active | removed; native Win+Tab/Win+numbers/etc. work again |
 | Three-finger swipe | left=next, right=previous workspace | original five modified registry values restored |
-| CMD | translucent launched consoles, Nerd Font/UTF-8, `l`, `clear`, `pwd` | registry defaults and Clink settings restored; setup script path removed |
+| CMD / PowerShell appearance | native background transparency/blur, opaque text; existing and new classic consoles | tracked console effects and original opacity restored |
+| CMD customization | Nerd Font/UTF-8, `l`, `clear`, `pwd` | registry defaults and Clink settings restored; setup script path removed |
 | Flow and mouse | Win+Space, Escape, cursor theme, Win+drag | **retained intentionally** |
 
 Some touchpad drivers cache settings until the next login; sign out yourself if
@@ -321,6 +322,47 @@ personal files are not deleted or changed by mode switching.
 The bar always shows 1–5; 6–10 appear while active or occupied. Caption changes
 cannot hide every app's custom-drawn buttons; protected windows may reject style
 changes. Classic Windows 10 CMD cannot render every newer Nerd Font glyph.
+CPU and RAM use chip/memory icons; volume and battery use state-aware icons
+instead of text prefixes. Percentages stay visible and all bar glyphs remain white.
+
+The Wi-Fi dropdown has a 400px-wide layout with a 360px scrolling network list:
+room for three expanded rows, with additional networks available by scrolling.
+Status, signal strength and Connect/Disconnect controls have separate reserved
+space. The popup and hover tooltips use the bar's 50%-opacity Catppuccin tint
+with native blur enabled. Header/footer backgrounds are transparent so they do
+not cover the blur. The list displays actual scan results, not placeholder rows;
+use its refresh button if a scan is still pending.
+
+### Classic terminal transparency and blur
+
+In Hypr mode, `terminal-effects.ahk` detects visible classic CMD, Windows
+PowerShell, and PowerShell 7 (`pwsh.exe`) console windows. It requests native
+Windows background blur without injecting into the shell, changing its profile,
+renaming it, stealing focus, or opening a console. Text stays opaque instead of
+fading the entire window. A one-second timer picks up newly opened consoles;
+hidden AMD/Lenovo/helper consoles are excluded.
+
+The implementation uses undocumented `SetWindowCompositionAttribute` acrylic
+for stronger native blur, visually verified on this Windows 10 PC for CMD and
+Windows PowerShell. No Catppuccin/color overlay is added: the acrylic activation
+alpha is the minimum 1/255 black (zero disables the effect on Windows 10).
+Windows determines the blur radius; it is not an adjustable radius setting.
+If acrylic is rejected, it falls back to tint-free blur-behind, then alpha
+transparency. OS updates, elevated windows, remote desktops or newer console hosts
+can behave differently. Windows Terminal is excluded; configure its own acrylic.
+
+Original layered-window attributes are saved locally in
+`%LOCALAPPDATA%\OmarchyWindows\terminal-effects.ini` with window/process identity
+checks. The console's current background palette slot is temporarily made neutral
+black so PowerShell's blue paint does not tint the compositor; its exact original
+RGB value is recorded too. Foreground colors and shell profile files are not
+rewritten. Colors visible through the blur come from the desktop/windows behind
+the terminal. Graceful service exit restores the palette and opacity; Remove also
+loads this state as a
+recovery step after an abnormal service exit. The prior accent is restored when
+the OS exposes its query API; otherwise the temporary accent is disabled.
+PowerShell 7 and other
+Windows versions still need interactive testing on their target machine.
 
 ## Startup, backups and safe removal
 

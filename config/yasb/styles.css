@@ -53,10 +53,17 @@
     padding-right: 4px;
     font-size: 10pt;
 }
-.tooltip, .calendar, .audio-menu {
+.calendar, .audio-menu {
     background-color: #1e1e2e;
     color: #ffffff;
     border: 1px solid #45475a;
+}
+.tooltip {
+    background-color: rgba(30, 30, 46, 0.50);
+    color: #ffffff;
+    padding: 6px 10px;
+    border: 1px solid #45475a;
+    border-radius: 6px;
 }
 
 /* WiFi widget and its connect menu */
@@ -65,17 +72,18 @@
 .wifi-widget .widget-container .icon { font-family: "JetBrainsMono NF"; color: #ffffff; }
 .wifi-menu {
     font-family: "Segoe UI";
-    background-color: rgba(30, 30, 46, 0.65);
-    min-width: 340px;
+    background-color: rgba(30, 30, 46, 0.50);
+    min-width: 400px;
+    max-width: 400px;
     border: 1px solid #45475a;
 }
 .wifi-menu .progress-bar { max-height: 2px; color: #89b4fa; }
 .wifi-menu .header {
-    font-size: 12px;
+    font-size: 10pt;
     font-weight: 600;
-    padding: 8px 12px;
+    padding: 12px 16px;
     color: #ffffff;
-    background-color: rgba(30, 30, 46, 0.85);
+    background-color: transparent;
     border-bottom: 1px solid #45475a;
 }
 .wifi-menu .error-message {
@@ -85,28 +93,55 @@
     color: #1e1e2e;
 }
 .wifi-menu .wifi-list { background-color: transparent; }
+/* YASB uses a QScrollArea with a details row plus a separate controls row.
+   Reserve their real heights: a 30px item compresses all three text lines. */
+/* Three expanded rows fit without clipping; additional networks scroll. */
+.wifi-menu QScrollArea { min-height: 360px; max-height: 360px; }
 .wifi-menu .wifi-item {
-    min-height: 30px;
-    padding: 2px 10px;
-    margin: 2px 4px;
-    border-radius: 6px;
+    min-height: 44px;
+    padding: 8px 12px;
+    margin: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid transparent;
 }
 .wifi-menu .wifi-item:hover { background-color: rgba(255, 255, 255, 0.06); }
-.wifi-menu .wifi-item[active=true] { background-color: rgba(255, 255, 255, 0.12); }
+.wifi-menu .wifi-item[active=true] {
+    min-height: 88px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid #585b70;
+}
+.wifi-menu .wifi-item .details-container { min-height: 40px; }
+.wifi-menu .wifi-item .right-container { min-width: 144px; min-height: 40px; }
+.wifi-menu .wifi-item .controls-container { min-height: 32px; margin-top: 8px; }
 .wifi-menu .wifi-item .icon {
     font-family: "Segoe MDL2 Assets";
     font-size: 20px;
-    margin-right: 8px;
+    min-width: 24px;
+    margin-right: 10px;
     color: #ffffff;
 }
-.wifi-menu .wifi-item .name { font-size: 10pt; color: #ffffff; }
-.wifi-menu .wifi-item .password { background-color: transparent; color: #ffffff; font-size: 10pt; }
-.wifi-menu .wifi-item .status { font-size: 10pt; color: #ffffff; }
-.wifi-menu .wifi-item .strength { font-size: 10pt; color: #ffffff; }
+.wifi-menu .wifi-item .name { font-size: 10pt; font-weight: 600; color: #ffffff; margin-right: 10px; }
+.wifi-menu .wifi-item .password {
+    background-color: #181825;
+    color: #ffffff;
+    font-size: 10pt;
+    min-height: 24px;
+    padding: 3px 8px;
+    margin-right: 8px;
+    border: 1px solid #585b70;
+    border-radius: 5px;
+}
+.wifi-menu .wifi-item .password:focus { border: 1px solid #b4befe; }
+.wifi-menu .wifi-item .status { font-size: 9pt; min-height: 18px; color: #ffffff; }
+.wifi-menu .wifi-item .strength { font-size: 9pt; min-height: 18px; color: #ffffff; }
 .wifi-menu .wifi-item .connect {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    min-width: 88px;
+    min-height: 24px;
     background-color: rgba(255, 255, 255, 0.15);
-    padding: 3px 14px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 5px;
     border: none;
     color: #ffffff;
 }
@@ -114,20 +149,21 @@
 .wifi-menu .wifi-item .connect:pressed { background-color: rgba(255, 255, 255, 0.35); }
 .wifi-menu .footer {
     font-size: 10pt;
-    padding: 8px 12px;
+    padding: 10px 16px;
     color: #ffffff;
-    background-color: rgba(30, 30, 46, 0.85);
+    background-color: transparent;
     border-top: 1px solid #45475a;
 }
 .wifi-menu .footer .settings-button,
 .wifi-menu .footer .refresh-icon {
-    font-family: "Segoe MDL2 Assets";
     color: #ffffff;
     background-color: transparent;
     border: none;
     min-width: 24px;
     min-height: 24px;
 }
+.wifi-menu .footer .settings-button { font-family: "Segoe UI"; font-size: 10pt; padding: 4px 6px; }
+.wifi-menu .footer .refresh-icon { font-family: "Segoe MDL2 Assets"; font-size: 16px; min-width: 32px; min-height: 32px; }
 .wifi-menu .footer .settings-button:hover,
 .wifi-menu .footer .refresh-icon:hover {
     background-color: rgba(255, 255, 255, 0.12);
